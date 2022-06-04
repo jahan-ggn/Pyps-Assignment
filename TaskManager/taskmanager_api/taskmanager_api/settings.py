@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = "accounts.User" # Overriding to refer to our custom user model
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts', # Custom app
 ]
 
 MIDDLEWARE = [
@@ -73,9 +74,13 @@ WSGI_APPLICATION = 'taskmanager_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# Configuring MySQL Database
 DATABASES = {
-'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
         'NAME': "taskmanager",
         'USER':'root',
         'PASSWORD':'',
